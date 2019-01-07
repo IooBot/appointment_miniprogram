@@ -1,0 +1,23 @@
+<view wx:if="{{loading}}" class='loading'>
+    <van-loading color="#fff" size="80rpx" custom-class='loading-spin'/>
+</view>
+
+<view wx:if="{{orders !== '' && orders.length === 0}}" class='no-order'>
+    这里还没有订单呢
+</view>
+
+<view wx:if="{{orders !== '' && orders.length !== 0}}">
+    <block wx:for="{{orders}}" wx:key="{{order.id}}" wx:for-item="order">
+        <van-card
+                num="{{order.customerNumber}}"
+                price="{{order.service_id.price}}"
+                desc="{{order.service_id.startTime}} - {{order.service_id.lastTime}}"
+                title="{{order.service_id.description}}"
+                custom-class="card"
+                title-class="title"
+                desc-class="description"
+                num-class="count"
+                price-class="price"
+        />
+    </block>
+</view>

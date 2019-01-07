@@ -1,0 +1,40 @@
+
+<view>
+  <swiper
+          indicator-dots="{{indicatorDots}}"
+          autoplay="{{autoplay}}"
+          interval="{{interval}}"
+          duration="{{duration}}"
+          circular="true"
+          previous-margin="60px"
+          next-margin="60px"
+  >
+    <block wx:for="{{imgUrls}}" wx:key="{{item}}">
+      <swiper-item class="slide-wrapper">
+        <image src="{{item}}" class="slide-image" width="375" height="150" />
+      </swiper-item>
+    </block>
+  </swiper>
+
+  <view wx:if="{{loading}}" class='loading'>
+    <van-loading color="#fff" size="80rpx" custom-class='loading-spin'/>
+  </view>
+
+  <view wx:if="{{servers!=='' && servers.length === 0}}">没有技师为您服务</view>
+
+
+<block wx:if="{{servers!=='' && servers.length !== 0}}" wx:for="{{servers}}" wx:key="{{server.id}}" wx:for-item="server">
+    <van-row custom-class="row">
+      <van-col span="4" offset="1"><view class="avatar" style='background-image: url({{server.img}})'></view></van-col>
+      <van-col span="8" offset="2">
+        <view class='server-name'>{{server.name}}</view>
+        <view class='server-description'>{{server.description}}</view>
+      </van-col>
+      <van-col span="4" offset="3">
+        <van-button id="{{server.id}}" type="primary" bind:tap="chooseMe" size="small">选我</van-button>
+      </van-col>
+    </van-row>
+  </block>
+
+  
+</view>

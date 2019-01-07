@@ -1,0 +1,4 @@
+.picker {
+    position: absolute;
+    bottom: 0
+}

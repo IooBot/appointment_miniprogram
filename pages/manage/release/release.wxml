@@ -1,0 +1,35 @@
+<van-notice-bar
+    mode="closeable"
+    text="只有管理员的微信才能看到此界面，此处作为样例全部展示"
+/>
+
+<view wx:if="{{loading}}" class='loading'>
+    <van-loading color="#fff" size="80rpx" custom-class='loading-spin'/>
+</view>
+
+<view wx:if="{{servers!=='' && servers.length === 0}}">没有技师为您工作</view>
+
+<van-cell-group wx:if="{{servers!=='' && servers.length !== 0}}">
+    <view class='cell-title'>你的技师</view>
+    <van-cell
+        wx:for="{{servers}}"
+        wx:for-item="server"
+        wx:key="{{server.id}}"
+        title="{{server.name}}"
+        bind:click="selectServer"
+        is-link
+        id="{{server.id}}"
+    >
+        <view slot="icon">
+            <view class="avatar" style='background-image: url({{server.img}})'/>
+        </view>
+    </van-cell>
+    <van-cell
+        title="添加一位技师"
+        is-link
+        bind:click="addServer"
+    />
+</van-cell-group>
+
+<ServiceRelease id="{{server}}" wx:if="{{server !== '' && server !== 'add'}}"/>
+<ServerAdd wx:if="{{server === 'add'}}"/>

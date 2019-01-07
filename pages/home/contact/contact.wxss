@@ -1,0 +1,21 @@
+/* pages/home/contact/contact.wxss */
+.loading {
+  width: 180rpx;
+  height: 180rpx;
+  background-color: #7d7d7d;
+  border-radius: 6rpx;
+  margin: 350rpx auto;
+}
+
+.loading-spin {
+    padding: 50rpx;
+}
+
+.button-group {
+    float: right;
+    margin-right: 20rpx;
+    margin-top: 20rpx;
+}
+.button {
+    margin-right: 10rpx;
+}

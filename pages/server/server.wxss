@@ -1,0 +1,49 @@
+/* pages/server/server.wxss */
+.loading {
+  width: 180rpx;
+  height: 180rpx;
+  background-color: #7d7d7d;
+  border-radius: 6rpx;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.loading-spin {
+    padding: 50rpx;
+}
+
+.avatar {
+  width: 70px;
+  height: 70px;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  border-radius: 50%;
+  border: 3px solid #eee;
+  overflow: hidden
+}
+
+.row {
+  margin-top: 80rpx;
+}
+
+.server-name {
+  color: black;
+  font-size: larger;
+  font-weight: bold;
+}
+
+.server-description {
+  color: #999999;
+  font-size: smaller;
+}
+
+.slide-image {
+  width: 100%;
+  height: 100%;
+}
+
+.slide-wrapper {
+  text-align: center;
+}

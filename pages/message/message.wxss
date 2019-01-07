@@ -1,0 +1,9 @@
+/* pages/message/message.wxss */
+.button-group {
+    float: right;
+    margin-right: 20rpx;
+    margin-top: 20rpx;
+}
+.button {
+    margin-right: 10rpx;
+}

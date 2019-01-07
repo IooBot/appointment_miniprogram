@@ -1,0 +1,47 @@
+<!--pages/message/message.wxml-->
+<van-cell-group>
+    <van-field
+        value="{{ name }}"
+        label="姓名"
+        placeholder="请输入您的姓名"
+        bind:change="nameInput"
+    />
+
+    <van-field
+        value="{{ phone }}"
+        label="手机号码"
+        placeholder="请输入手机号"
+        border="{{ false }}"
+        bind:change="phoneInput"
+    />
+
+    <van-switch-cell
+        title="为自己预约？"
+        checked="{{ checked }}"
+        bind:change="forme">
+    </van-switch-cell>
+
+    <van-cell title="选择人数">
+        <van-stepper name="people" value="{{people}}" bindchange="peopleSlide"></van-stepper>
+    </van-cell>
+
+    <van-field
+        value="{{ remark }}"
+        label="留言"
+        type="textarea"
+        placeholder="留言给店家"
+        autosize
+        border="{{ false }}"
+        bind:change="remarkInput"
+    />
+        
+</van-cell-group>
+
+<view wx:if="{{count !== 0}}" class='button-group'>
+    <van-button size="small" type="primary" bind:click="formSubmit" class='button'>提交</van-button>
+    <van-button size="small" type="danger" bind:click="formReset">重置</van-button>
+</view>
+
+<view wx:if="{{count === 0}}" class='button-group'>
+    名额已满
+</view>

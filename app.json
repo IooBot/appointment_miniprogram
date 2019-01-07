@@ -1,0 +1,38 @@
+{
+  "pages": [
+    "pages/server/server",
+    "pages/home/home",
+    "pages/manage/manage",
+    "pages/service/service",
+    "pages/message/message"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "selectedColor": "#353535",
+    "list": [
+      {
+        "pagePath": "pages/server/server",
+        "text": "预约",
+        "iconPath": "images/timeline.png",
+        "selectedIconPath": "images/timeline_s.png"
+      },
+      {
+        "pagePath": "pages/home/home",
+        "text": "我的",
+        "iconPath": "images/home.png",
+        "selectedIconPath": "images/home_s.png"
+      },
+      {
+        "pagePath": "pages/manage/manage",
+        "text": "管理",
+        "iconPath": "images/settings.png",
+        "selectedIconPath": "images/settings_s.png"
+      }
+    ]
+  }
+}

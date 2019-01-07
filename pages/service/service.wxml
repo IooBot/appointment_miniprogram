@@ -1,0 +1,37 @@
+<!--pages/service/service.wxml-->
+<view>
+  <view wx:if="{{loading}}" class='loading'>
+    <van-loading color="#fff" size="80rpx" custom-class='loading-spin'/>
+  </view>
+  <view wx:if="{{service !== '' && service.length === 0}}" class='rest'>
+    今日休息...
+  </view>
+  <block wx:for="{{service}}" wx:key="{{service.id}}" wx:for-item="service">
+    <van-card
+      num="{{service.repertory_id.count}}"
+      price="{{service.price}}"
+      desc="{{service.startTime}} - {{service.lastTime}}"
+      title="{{service.description}}"
+      custom-class="card"
+      title-class="title"
+      desc-class="description"
+      num-class="count"
+      price-class="price"
+    >
+      <view slot="footer">
+        <van-button 
+          wx:if="{{service.repertory_id.count !== 0}}" 
+          id="{{service.id}}" 
+          data-count="{{service.repertory_id.count}}" 
+          data-repertoryid="{{service.repertory_id.id}}" 
+          bind:tap="chooseThis"
+          size="small"
+          type='primary'
+        >
+          预约
+        </van-button>
+        <view wx:else>名额已满</view>
+      </view>
+    </van-card>
+  </block>
+</view> 

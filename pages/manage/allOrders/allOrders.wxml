@@ -1,0 +1,29 @@
+<!--pages/manage/allOrders/allOrders.wxml-->
+
+<van-notice-bar
+        mode="closeable"
+        text="只有管理员的微信才能看到此界面，此处作为样例全部展示"
+/>
+
+<van-cell
+        title="选择订单类型"
+        value="{{kindType}}"
+        is-link
+        bind:click="selectType"
+/>
+
+<van-popup
+        show="{{ showPopup }}"
+        position="bottom"
+>
+    <van-picker
+            custom-class="{{picker}}"
+            show-toolbar
+            title="标题"
+            columns="{{ columns }}"
+            bind:cancel="onCancel"
+            bind:confirm="onConfirm"
+    />
+</van-popup>
+
+<SelectedOrders kind="{{kind}}"/>

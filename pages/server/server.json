@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "van-loading": "../../dist/loading/index",
+    "van-row": "../../dist/row/index",
+    "van-col": "../../dist/col/index",
+    "van-button": "../../dist/button/index"
+  }
+}

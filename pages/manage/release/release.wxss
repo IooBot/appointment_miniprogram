@@ -1,0 +1,33 @@
+/* pages/manage/release/release.wxss */
+.loading {
+    width: 180rpx;
+    height: 180rpx;
+    background-color: #7d7d7d;
+    border-radius: 6rpx;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.loading-spin {
+    padding: 50rpx;
+}
+
+.avatar {
+    width: 60rpx;
+    height: 60rpx;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    border-radius: 10rpx;
+    border: 1rpx solid #eee;
+    overflow: hidden;
+    margin-right: 15rpx;
+}
+
+.cell-title {
+    color: #969799;
+    font-weight: 400;
+    font-size: 35rpx;
+    padding: 40rpx 20rpx 20rpx;
+}

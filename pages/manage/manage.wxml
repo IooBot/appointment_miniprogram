@@ -1,0 +1,17 @@
+<!--pages/manage/manage.wxml-->
+
+<van-tabs
+        sticky
+        active="{{ activeTab }}"
+        custom-class="tabbar"
+        swipeable="{{true}}"
+        animated="{{true}}"
+        bind:change="switchTab"
+>
+  <van-tab title="所有订单" ><AllOrders /></van-tab>
+  <van-tab title="发布服务" ><Release /></van-tab>
+</van-tabs>
+
+
+
+

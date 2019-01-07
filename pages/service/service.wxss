@@ -1,0 +1,48 @@
+/* pages/service/service.wxss */
+.loading {
+  width: 180rpx;
+  height: 180rpx;
+  background-color: #7d7d7d;
+  border-radius: 6rpx;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.loading-spin {
+    padding: 50rpx;
+}
+
+.rest {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.card {
+    margin-bottom: 10rpx
+}
+
+
+.title {
+  color: black;
+  font-size: 34rpx;
+  font-weight: bold;
+  margin-top: 10rpx;
+}
+
+.description {
+  margin-top: 10rpx;
+  color: #999999;
+  font-size: 30rpx;
+}
+
+.count {
+    font-size: 25rpx;
+}
+
+.price {
+    font-size: 40rpx;
+}
