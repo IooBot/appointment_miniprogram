@@ -11,7 +11,7 @@
         <van-card
                 num="{{order.customerNumber}}"
                 price="{{order.service_id.price}}"
-                desc="{{order.service_id.startTime}} - {{order.service_id.lastTime}}"
+                desc="{{order.service_id.formatDate}} : {{order.service_id.formatStartTime}} - {{order.service_id.formatEndTime}}"
                 title="{{order.service_id.description}}"
                 custom-class="card"
                 title-class="title"

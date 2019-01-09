@@ -1,0 +1,7 @@
+
+.cell-title {
+    color: #969799;
+    font-weight: 400;
+    font-size: 35rpx;
+    padding: 40rpx 20rpx 20rpx;
+}

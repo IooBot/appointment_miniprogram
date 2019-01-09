@@ -1,0 +1,8 @@
+{
+    "component": true,
+    "usingComponents": {
+        "van-cell": "../../../../dist/cell/index",
+        "van-cell-group": "../../../../dist/cell-group/index",
+        "ServiceRelease": "./serviceRelease/serviceRelease"
+    }
+}

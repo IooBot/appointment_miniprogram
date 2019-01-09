@@ -1,4 +1,5 @@
-const {fetchGraphql} = require('../../../utils/util.js');
+// import Dialog from '../../../dist/dialog/dialog';
+const {fetchGraphql, dateTime} = require('../../../utils/util.js');
 const {orderbyprops} = require('../../../config/gql.js');
 const app = getApp();
 
@@ -18,13 +19,19 @@ Component({
                             user_id: app.globalData.userID,
                             orderStatus: newVal
                         },
-                        'orders',
+                        null,
                         'orderbyprops',
-                        this
+                        null
                     )
                         .then(orders => {
+                            orders.forEach(order => {
+                                order.service_id.formatDate = dateTime(Number(order.service_id.startTime), true).date;
+                                order.service_id.formatStartTime = dateTime(Number(order.service_id.startTime), true).time;
+                                order.service_id.formatEndTime = dateTime(Number(order.service_id.startTime) + Number(order.service_id.lastTime), true).time;
+                            });
                             this.setData({
-                                loading: false
+                                loading: false,
+                                orders
                             });
                             console.log(orders)
                         });
@@ -41,13 +48,19 @@ Component({
                     user_id: app.globalData.userID,
                     orderStatus: 'success'
                 },
-                'orders',
+                null,
                 'orderbyprops',
-                this
+                null
             )
                 .then(orders => {
+                    orders.forEach(order => {
+                        order.service_id.formatDate = dateTime(Number(order.service_id.startTime), true).date;
+                        order.service_id.formatStartTime = dateTime(Number(order.service_id.startTime), true).time;
+                        order.service_id.formatEndTime = dateTime(Number(order.service_id.startTime) + Number(order.service_id.lastTime), true).time;
+                    });
                     this.setData({
-                        loading: false
+                        loading: false,
+                        orders
                     })
                 });
         }
@@ -60,11 +73,42 @@ Component({
 
     methods: {
         deleteThis() {
-
+            wx.showToast({
+                title: '已删除',
+                icon: 'success',
+                duration: 2000
+            });
+            console.log('仅做展示，无操作');
         },
 
         cancelThis() {
+            // console.log('函数是进的来的');
+            // Dialog.confirm({
+            //     title: '您确定取消？',
+            //     message: '取消后30分钟内不能再次执行',
+            //
+            // }).then(() => {
+            //     // on confirm
+            // }).catch(() => {
+            //     // on cancel
+            // });
 
+            wx.showModal({
+                title: '确定取消？',
+                content: '取消后30分钟内不能再次预约',
+                success(res) {
+                    if (res.confirm) {
+                        console.log('仅做展示，无操作');
+                        wx.showToast({
+                            title: '已取消',
+                            icon: 'success',
+                            duration: 2000
+                        });
+                    } else if (res.cancel) {
+                        console.log('你取消了')
+                    }
+                }
+            });
         }
     }
 });

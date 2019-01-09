@@ -1,4 +1,4 @@
-const {fetchGraphql} = require('../../../../utils/util.js');
+const {fetchGraphql, dateTime} = require('../../../../utils/util.js');
 const {adminorderbyprops} = require('../../../../config/gql.js');
 
 Component({
@@ -16,13 +16,20 @@ Component({
                     if (newVal === 'all') varObj = {};
                     fetchGraphql(adminorderbyprops,
                         varObj,
-                        'orders',
+                        null,
                         'adminorderbyprops',
-                        this
+                        null
                     )
                         .then(orders => {
+                            orders.forEach(order => {
+                                order.service_id.formatDate = dateTime(Number(order.service_id.startTime), true).date;
+                                order.service_id.formatStartTime = dateTime(Number(order.service_id.startTime), true).time;
+                                order.service_id.formatEndTime = dateTime(Number(order.service_id.startTime) + Number(order.service_id.lastTime), true).time;
+                            });
+
                             this.setData({
-                                loading: false
+                                loading: false,
+                                orders
                             });
                         });
                 }
@@ -37,13 +44,20 @@ Component({
                 {
                     orderStatus: 'success'
                 },
-                'orders',
+                null,
                 'adminorderbyprops',
-                this
+                null
             )
                 .then(orders => {
+                    orders.forEach(order => {
+                        order.service_id.formatDate = dateTime(Number(order.service_id.startTime), true).date;
+                        order.service_id.formatStartTime = dateTime(Number(order.service_id.startTime), true).time;
+                        order.service_id.formatEndTime = dateTime(Number(order.service_id.startTime) + Number(order.service_id.lastTime), true).time;
+                    });
+
                     this.setData({
-                        loading: false
+                        loading: false,
+                        orders
                     });
                 });
         }

@@ -1,23 +1,40 @@
 // pages/manage/release/serverAdd/serverAdd.js
 Component({
-    /**
-     * 组件的属性列表
-     */
     properties: {
 
     },
 
-    /**
-     * 组件的初始数据
-     */
     data: {
-
+        name: '',
+        remark: ''
     },
 
-    /**
-     * 组件的方法列表
-     */
     methods: {
+        nameInput(e) {
+            this.setData({
+                name: e.detail
+            })
+        },
 
+        remarkInput(e) {
+            this.setData({
+                remark: e.detail
+            })
+        },
+
+        submit() {
+            wx.showToast({
+                title: '添加成功',
+                icon: 'success'
+            });
+            console.log('仅做展示，无操作');
+        },
+
+        reset() {
+            this.setData({
+                name: '',
+                remark: ''
+            })
+        }
     }
 });

@@ -1,0 +1,7 @@
+<!--pages/vant/vant.wxml-->
+<text>pages/vant/vant.wxml</text>
+<van-button bind:click="cancelThis">
+    取消
+</van-button>
+
+<van-dialog id="van-dialog" />

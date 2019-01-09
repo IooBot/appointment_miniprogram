@@ -1,3 +1,4 @@
+// import Notify from '../../dist/notify/notify';
 const { fetchGraphql } = require('../../../utils/util.js');
 const { userbyid } = require('../../../config/gql.js');
 const app = getApp();
@@ -44,5 +45,27 @@ Component({
               name: e.detail
           })
       },
+      submit: function() {
+          if(this.data.name && this.data.phone) {
+              wx.showToast({
+                  title: '修改成功',
+                  icon: 'success'
+              });
+              console.log('仅做展示，无操作');
+          } else {
+              wx.showToast({
+                  title: '修改成功',
+                  icon: 'success'
+              });
+          }
+
+
+      },
+      reset: function() {
+          this.setData({
+              name: '',
+              phone: ''
+          })
+      }
   }
-})
+});

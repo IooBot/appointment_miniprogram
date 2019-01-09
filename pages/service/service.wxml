@@ -1,16 +1,15 @@
-<!--pages/service/service.wxml-->
 <view>
   <view wx:if="{{loading}}" class='loading'>
     <van-loading color="#fff" size="80rpx" custom-class='loading-spin'/>
   </view>
-  <view wx:if="{{service !== '' && service.length === 0}}" class='rest'>
+  <view wx:if="{{services !== '' && services.length === 0}}" class='rest'>
     今日休息...
   </view>
-  <block wx:for="{{service}}" wx:key="{{service.id}}" wx:for-item="service">
+  <block wx:for="{{services}}" wx:key="{{service.id}}" wx:for-item="service">
     <van-card
       num="{{service.repertory_id.count}}"
       price="{{service.price}}"
-      desc="{{service.startTime}} - {{service.lastTime}}"
+      desc="{{service.formatDate}} : {{service.formatStartTime}} - {{service.formatEndTime}}"
       title="{{service.description}}"
       custom-class="card"
       title-class="title"

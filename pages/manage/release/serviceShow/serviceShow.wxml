@@ -1,0 +1,26 @@
+<view wx:if="{{loading}}" class='loading'>
+    <van-loading color="#fff" size="80rpx" custom-class='loading-spin'/>
+</view>
+
+<van-cell-group wx:if="{{services!==''}}">
+    <view class='cell-title'>TA的服务项</view>
+    <van-cell
+            wx:for="{{services}}"
+            wx:for-item="service"
+            wx:key="{{service.id}}"
+            title="{{service.description}}"
+            is-link
+            data-index="{{index}}"
+            bind:click="selectService"
+    />
+    <van-cell
+            title="{{services.length !== 0? '添加': '没有服务项，点我添加'}}"
+            is-link
+            data-index="add"
+            bind:click="selectService"
+    />
+</van-cell-group>
+
+<ServiceRelease wx:if="{{service !== ''}}" service="{{service}}"/>
+
+

@@ -4,7 +4,7 @@
         "van-notice-bar": "../../../dist/notice-bar/index",
         "van-cell": "../../../dist/cell/index",
         "van-cell-group": "../../../dist/cell-group/index",
-        "ServiceRelease": "./serviceRelease/serviceRelease",
+        "ServiceShow": "./serviceShow/serviceShow",
         "ServerAdd": "./serverAdd/serverAdd"
     }
 }

@@ -21,6 +21,6 @@
 </van-cell-group>
 
 <view class='button-group'>
-    <van-button size="small" type="primary" bind:click="formSubmit" class='button'>提交</van-button>
-    <van-button size="small" type="danger" bind:click="formReset">重置</van-button>
+    <van-button size="small" type="primary" bind:click="submit" class='button'>提交</van-button>
+    <van-button size="small" type="danger" bind:click="reset">重置</van-button>
 </view>

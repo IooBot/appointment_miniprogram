@@ -1,0 +1,61 @@
+<van-cell-group>
+    <view class='cell-title'>请输入服务项信息</view>
+    <van-field
+            value="{{ description }}"
+            label="服务类型"
+            placeholder="请输入服务类型"
+            bind:change="descriptionInput"
+    />
+
+    <van-field
+            value="{{ price }}"
+            label="价格"
+            placeholder="请输入价格"
+            border="{{ false }}"
+            bind:change="priceInput"
+    />
+
+    <van-cell title="库存">
+        <van-stepper name="repertory" value="{{repertory}}" bindchange="repertorySlide"></van-stepper>
+    </van-cell>
+
+    <van-cell title="选择日期">
+        <picker
+                mode="date"
+                value="{{date}}"
+                start="2018-01-01"
+                end="2021-12-31"
+                bindchange="dateChange"
+        >
+            <view class="picker">{{date}}</view>
+        </picker>
+    </van-cell>
+
+    <van-cell title="选择开始时间">
+        <picker
+                mode="time"
+                value="{{startTime}}"
+                start="00:00"
+                end="23:59"
+                bindchange="startTimeChange"
+        >
+            <view class="picker">{{startTime}}</view>
+        </picker>
+    </van-cell>
+    <van-cell title="选择结束时间">
+        <picker
+                mode="time"
+                value="{{endTime}}"
+                start="00:00"
+                end="23:59"
+                bindchange="endTimeChange"
+        >
+            <view class="picker">{{endTime}}</view>
+        </picker>
+    </van-cell>
+</van-cell-group>
+
+<view class='button-group'>
+    <van-button size="small" type="primary" bind:click="submit" class='button'>提交</van-button>
+    <van-button size="small" type="danger" bind:click="reset">重置</van-button>
+</view>

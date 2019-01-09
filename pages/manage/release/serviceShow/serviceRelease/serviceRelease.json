@@ -1,0 +1,10 @@
+{
+  "component": true,
+  "usingComponents": {
+    "van-stepper": "../../../../../../dist/stepper/index",
+    "van-field": "../../../../../../dist/field/index",
+    "van-cell-group": "../../../../../../dist/cell-group/index",
+    "van-cell": "../../../../../../dist/cell/index",
+    "van-button": "../../../../../../dist/button/index"
+  }
+}

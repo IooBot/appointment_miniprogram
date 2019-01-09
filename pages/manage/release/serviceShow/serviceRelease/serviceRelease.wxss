@@ -1,0 +1,18 @@
+
+.cell-title {
+    color: #969799;
+    font-weight: 400;
+    font-size: 35rpx;
+    padding: 40rpx 20rpx 20rpx;
+}
+
+.button-group {
+    float: right;
+    margin-right: 20rpx;
+    margin-top: 20rpx;
+    margin-bottom: 20rpx;
+}
+.button {
+    margin-right: 10rpx;
+}
+

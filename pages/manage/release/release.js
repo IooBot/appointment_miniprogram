@@ -12,7 +12,7 @@ Component({
      */
     data: {
         servers: '',
-        server: '',
+        serverID: '',
     },
 
     /**
@@ -50,13 +50,16 @@ Component({
 
         selectServer(e) {
             this.setData({
-                server: e.target.id
+                serverID: e.target.id
+            });
+            wx.showLoading({
+                title: '获取服务中',
             })
         },
 
         addServer() {
             this.setData({
-                server: 'add'
+                serverID: 'add'
             })
         }
     },

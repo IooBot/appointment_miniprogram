@@ -1,5 +1,5 @@
 
-<view class='cell-title'>技师的服务</view>
+<view class='cell-title'>添加新的技师</view>
 <van-cell-group>
     <van-field
             value="{{ name }}"
@@ -20,6 +20,6 @@
 </van-cell-group>
 
 <view class='button-group'>
-    <van-button size="small" type="primary" bind:click="formSubmit" class='button'>提交</van-button>
-    <van-button size="small" type="danger" bind:click="formReset">重置</van-button>
+    <van-button size="small" type="primary" bind:click="submit" class='button'>提交</van-button>
+    <van-button size="small" type="danger" bind:click="reset">重置</van-button>
 </view>
