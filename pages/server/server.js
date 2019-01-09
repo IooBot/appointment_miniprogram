@@ -46,7 +46,7 @@ Page({
     },
 
     onLoad() {
-        this.useStorge();
+        this.noUserStorge();
         wx.setNavigationBarTitle({
             title: '选择一位技师'
         })
