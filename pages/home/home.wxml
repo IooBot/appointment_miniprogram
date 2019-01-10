@@ -7,8 +7,8 @@
     animated="{{true}}"
     bind:change="switchTab"
 >
-    <van-tab title="已预约" ><showMy kind="{{kind}}"/></van-tab>
-    <van-tab title="已取消" ><showMy kind="{{kind}}"/></van-tab>
+    <van-tab title="已预约" ><showMy kind="{{kind}}" refresh="{{refresh}}"/></van-tab>
+    <van-tab title="已取消" ><showMy kind="{{kind}}" refresh="{{refresh}}"/></van-tab>
     <van-tab title="我的信息"><contact /></van-tab>
 </van-tabs>
 

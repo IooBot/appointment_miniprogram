@@ -5,7 +5,7 @@ Component({
     properties: {
         serverID: {
             type: String,
-            observer(newVal, oldVal, changedPath) {
+            observer(newVal) {
                 this.setData({
                     services: '',
                     service: ''
@@ -20,7 +20,7 @@ Component({
                     .then(services => {
                         console.log(services);
                         wx.hideLoading()
-                    });
+                    })
                 }
             }
         }
@@ -39,9 +39,11 @@ Component({
                     service: {id: 'add', server_id: {id: this.properties.serverID}}
                 })
             } else {
+                let service = this.data.services[index];
+                delete service.server_id.img;
                 this.setData({
-                    service: this.data.services[index]
-                })
+                    service
+                });
             }
         }
     }

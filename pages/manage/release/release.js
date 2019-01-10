@@ -2,31 +2,44 @@ const {fetchGraphql} = require('../../../utils/util.js');
 const {serverbyprops} = require('../../../config/gql.js');
 
 Component({
-    /**
-     * 组件的属性列表
-     */
-    properties: {},
+    properties: {
+        refresh: {
+            type: Number,
+            observer(newVal) {
+                if (newVal !== '' && Date.now() - newVal < 1000) {
+                    this.noUseStorge(() => {
+                        this.setData({
+                            serverID: ''
+                        });
+                        wx.stopPullDownRefresh({
+                            complete: function () {
+                                wx.showToast({
+                                    title: '已刷新',
+                                    icon: 'success',
+                                    duration: 800
+                                });
+                            }
+                        });
+                    });
+                }
+            }
+        }
+    },
 
-    /**
-     * 组件的初始数据
-     */
     data: {
         servers: '',
         serverID: '',
     },
 
-    /**
-     * 组件的方法列表
-     */
     methods: {
-        useStorge() {
+        useStorge(func) {
             const servers = wx.getStorageSync('servers');
-            console.log(servers);
             if (servers) {
                 this.setData({
                     servers,
                     loading: false
-                })
+                });
+                if(func) func();
             } else {
                 fetchGraphql(serverbyprops, {}, 'servers', 'serverbyprops', this).then(servers => {
                     wx.setStorage({
@@ -35,16 +48,18 @@ Component({
                     });
                     this.setData({
                         loading: false
-                    })
+                    });
+                    if(func) func();
                 })
             }
         },
 
-        noUserStorge() {
+        noUseStorge(func) {
             fetchGraphql(serverbyprops, {}, 'servers', 'serverbyprops', this).then(servers => {
                 this.setData({
                     loading: false
-                })
+                });
+                if(func) func();
             })
         },
 
@@ -66,7 +81,7 @@ Component({
 
     lifetimes: {
         attached() {
-            this.useStorge()
+            this.noUseStorge()
         }
     }
 });

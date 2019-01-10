@@ -1,4 +1,5 @@
-import {dateTime} from '../../../../../utils/util';
+import {idGen, dateTime, fetchGraphql} from '../../../../../utils/util';
+import {createserviceAndcreaterepertory, updateserviceAndupdaterepertory} from '../../../../../config/gql';
 
 Component({
     properties: {
@@ -12,7 +13,7 @@ Component({
                 console.log(newVal);
                 service.id === 'add' ?
                     this.setData({
-                        price: 0,
+                        price: '',
                         description: '',
                         repertory: 0,
                         date: dateTime(Date.now(), true).date,
@@ -34,7 +35,7 @@ Component({
 
     data: {
         service: '',
-        price: 0,
+        price: '',
         description: '',
         repertory: 0,
         date: '2019-01-01',
@@ -102,7 +103,7 @@ Component({
 
         reset() {
             this.setData({
-                price: 0,
+                price: '',
                 description: '',
                 repertory: 0,
                 date: dateTime(Date.now(), true).date,
@@ -115,12 +116,43 @@ Component({
             let startTime = dateTime({date: this.data.date, time: this.data.startTime}, false);
             let endTime = dateTime({date: this.data.date, time: this.data.endTime}, false);
             let lastTime = endTime - startTime;
-            wx.showToast({
-                title: this.data.service.id==='add'?'已添加': '已修改',
-                icon: 'success',
-                duration: 2000
-            });
-            console.log('仅做展示，无操作');
+            let {price, description, repertory} = this.data;
+            if (this.data.service.id === 'add') {
+                fetchGraphql(createserviceAndcreaterepertory,
+                    {
+                        server_id: this.properties.service.server_id.id,
+                        service_id: idGen('service'),
+                        repertory_id: idGen('repertory'),
+                        description,
+                        startTime,
+                        lastTime,
+                        price,
+                        count: repertory,
+                        createdAt: Date.now(),
+                        updatedAt: ''
+                    }
+                )
+                    .then(result => {
+                        wx.startPullDownRefresh()
+                    });
+            } else {
+                fetchGraphql(updateserviceAndupdaterepertory,
+                    {
+                        server_id: this.properties.service.server_id.id,
+                        service_id: this.properties.service.id,
+                        repertory_id: this.properties.service.repertory_id.id,
+                        description,
+                        startTime,
+                        lastTime,
+                        price,
+                        count: repertory,
+                        updatedAt: Date.now()
+                    }
+                )
+                    .then(result => {
+                        wx.startPullDownRefresh()
+                    });
+            }
         },
     }
 });

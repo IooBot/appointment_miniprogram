@@ -1,8 +1,8 @@
-// pages/manage/release/serverAdd/serverAdd.js
-Component({
-    properties: {
+import {idGen, fetchGraphql} from '../../../../utils/util';
+import {createserver} from '../../../../config/gql';
 
-    },
+Component({
+    properties: {},
 
     data: {
         name: '',
@@ -23,11 +23,23 @@ Component({
         },
 
         submit() {
-            wx.showToast({
-                title: '添加成功',
-                icon: 'success'
-            });
-            console.log('仅做展示，无操作');
+            let {name, remark} = this.data;
+            fetchGraphql(createserver,
+                {
+                    id: idGen('server'),
+                    name,
+                    description: remark,
+                    img: '',
+                    createdAt: Date.now(),
+                    updatedAt: ''
+                },
+                null,
+                'createserver',
+                null
+            )
+                .then(server => {
+                    wx.startPullDownRefresh();
+                });
         },
 
         reset() {

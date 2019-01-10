@@ -1,6 +1,6 @@
 // import Notify from '../../dist/notify/notify';
 const { fetchGraphql } = require('../../../utils/util.js');
-const { userbyid } = require('../../../config/gql.js');
+const { userbyid, updateuser } = require('../../../config/gql.js');
 const app = getApp();
 
 Component({
@@ -22,18 +22,13 @@ Component({
             });
         }
     },
-  /**
-   * 组件的初始数据
-   */
+
     data: {
         loading: true,
         phone: '',
         name: ''
     },
 
-  /**
-   * 组件的方法列表
-   */
   methods: {
       phoneInput: function (e) {
           this.setData({
@@ -45,18 +40,35 @@ Component({
               name: e.detail
           })
       },
+
       submit: function() {
-          if(this.data.name && this.data.phone) {
-              wx.showToast({
-                  title: '修改成功',
-                  icon: 'success'
+          let {name, phone} = this.data;
+          if(name && phone) {
+              fetchGraphql(updateuser,
+                  {
+                      id: app.globalData.userID,
+                      telephone: phone,
+                      nickname: name,
+                      updatedAt: Date.now()
+                  },
+                  null,
+                  'updateuser',
+                  null
+              )
+              .then(user => {
+                  console.log(user);
+                  wx.showToast({
+                      title: '修改成功',
+                      icon: 'success'
+                  });
               });
-              console.log('仅做展示，无操作');
+
           } else {
               wx.showToast({
-                  title: '修改成功',
-                  icon: 'success'
-              });
+                  title: '无效的姓名或联系方式',
+                  icon: 'none',
+                  duration: 1000
+              })
           }
 
 

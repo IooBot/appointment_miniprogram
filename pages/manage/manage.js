@@ -1,6 +1,7 @@
 Page({
     data: {
         activeTab: 0,
+        refresh: ''
     },
 
     onReady() {
@@ -13,5 +14,12 @@ Page({
         this.setData({
             activeTab: e.detail.index
         });
-    }
+    },
+
+    onPullDownRefresh: function () {
+        console.log('manage 下拉');
+        this.setData({
+            refresh: Date.now()
+        })
+    },
 });

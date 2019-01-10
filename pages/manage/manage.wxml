@@ -9,7 +9,7 @@
         bind:change="switchTab"
 >
   <van-tab title="所有订单" ><AllOrders /></van-tab>
-  <van-tab title="发布服务" ><Release /></van-tab>
+  <van-tab title="发布服务" ><Release refresh="{{refresh}}"/></van-tab>
 </van-tabs>
 
 

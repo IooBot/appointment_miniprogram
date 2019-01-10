@@ -11,10 +11,9 @@
 }
 
 .no-order {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    margin: 50rpx 0 0 250rpx;
+    color: #999999;
+    font-size: 30rpx;
 }
 
 .title {

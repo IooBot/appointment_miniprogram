@@ -9,7 +9,8 @@ Component({
             observer(newVal, oldVal, changedPath) {
                 this.setData({
                     loading: true,
-                    orders: ''
+                    orders: '',
+                    status: newVal
                 });
                 if (newVal !== '') {
                     let varObj = {orderStatus: newVal};
@@ -25,6 +26,7 @@ Component({
                                 order.service_id.formatDate = dateTime(Number(order.service_id.startTime), true).date;
                                 order.service_id.formatStartTime = dateTime(Number(order.service_id.startTime), true).time;
                                 order.service_id.formatEndTime = dateTime(Number(order.service_id.startTime) + Number(order.service_id.lastTime), true).time;
+                                delete order.service_id.server_id.img;
                             });
 
                             this.setData({
@@ -42,7 +44,7 @@ Component({
             // 在组件实例进入页面节点树时执行
             fetchGraphql(adminorderbyprops,
                 {
-                    orderStatus: 'success'
+                    orderStatus: this.data.status
                 },
                 null,
                 'adminorderbyprops',
@@ -53,6 +55,7 @@ Component({
                         order.service_id.formatDate = dateTime(Number(order.service_id.startTime), true).date;
                         order.service_id.formatStartTime = dateTime(Number(order.service_id.startTime), true).time;
                         order.service_id.formatEndTime = dateTime(Number(order.service_id.startTime) + Number(order.service_id.lastTime), true).time;
+                        delete order.service_id.server_id.img;
                     });
 
                     this.setData({
@@ -65,7 +68,8 @@ Component({
 
     data: {
         loading: true,
-        orders: ''
+        orders: '',
+        status: 'success'
     },
 
     methods: {}

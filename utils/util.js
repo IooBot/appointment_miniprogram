@@ -2,7 +2,7 @@ const idGen = (kind) => {
     return kind + '_' + Date.now() + '_' + Math.random().toString().slice(-8);
 };
 
-const graphqlURL = 'https://orderfcdb.szu.im/graphql';
+const graphqlURL = 'https://order.szu.im/graphql';
 
 const fetchGraphql = (query, variables, dataName, dataBack, that) => {
     // 如果给了 databack，则返回对应的数据，没有则返回全部
@@ -30,8 +30,12 @@ const fetchGraphql = (query, variables, dataName, dataBack, that) => {
                         [dataName]: data
                     })
                 }
-
+                console.log('request success', res);
                 resolve(data);
+            },
+
+            fail: function (err) {
+                console.log('request err', err)
             }
         })
     })

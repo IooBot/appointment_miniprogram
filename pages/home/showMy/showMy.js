@@ -1,6 +1,5 @@
-// import Dialog from '../../../dist/dialog/dialog';
 const {fetchGraphql, dateTime} = require('../../../utils/util.js');
-const {orderbyprops} = require('../../../config/gql.js');
+const {orderbyprops, updateorderAndupdaterepertory, updateorder} = require('../../../config/gql.js');
 const app = getApp();
 
 Component({
@@ -8,45 +7,57 @@ Component({
         kind: {
             type: String,
             value: 'success',
-            observer(newVal, oldVal, changedPath) {
+            observer(newVal) {
                 this.setData({
                     loading: true,
-                    orders: ''
+                    orders: '',
+                    orderStatus: newVal
                 });
                 if (newVal !== '') {
-                    fetchGraphql(orderbyprops,
-                        {
-                            user_id: app.globalData.userID,
-                            orderStatus: newVal
-                        },
-                        null,
-                        'orderbyprops',
-                        null
-                    )
-                        .then(orders => {
-                            orders.forEach(order => {
-                                order.service_id.formatDate = dateTime(Number(order.service_id.startTime), true).date;
-                                order.service_id.formatStartTime = dateTime(Number(order.service_id.startTime), true).time;
-                                order.service_id.formatEndTime = dateTime(Number(order.service_id.startTime) + Number(order.service_id.lastTime), true).time;
-                            });
-                            this.setData({
-                                loading: false,
-                                orders
-                            });
-                            console.log(orders)
+                    this.noUseStorge(newVal);
+                }
+            }
+        },
+
+        refresh: {
+            type: Number,
+            observer(newVal) {
+                if (newVal !== '' && Date.now() - newVal < 1000) {
+                    this.noUseStorge(this.data.orderStatus, () => {
+                        wx.stopPullDownRefresh({
+                            complete: function () {
+                                wx.showToast({
+                                    title: '已刷新',
+                                    icon: 'success',
+                                    duration: 800
+                                });
+                            }
                         });
+                    });
                 }
             }
         }
     },
 
+
     lifetimes: {
         attached() {
-            // 在组件实例进入页面节点树时执行
+            this.noUseStorge(this.data.orderStatus);
+        }
+    },
+
+    data: {
+        loading: true,
+        orders: '',
+        orderStatus: 'success'
+    },
+
+    methods: {
+        noUseStorge (orderStatus, func) {
             fetchGraphql(orderbyprops,
                 {
                     user_id: app.globalData.userID,
-                    orderStatus: 'success'
+                    orderStatus
                 },
                 null,
                 'orderbyprops',
@@ -61,49 +72,51 @@ Component({
                     this.setData({
                         loading: false,
                         orders
-                    })
+                    });
+                    if (func) func();
                 });
-        }
-    },
-
-    data: {
-        loading: true,
-        orders: ''
-    },
-
-    methods: {
-        deleteThis() {
-            wx.showToast({
-                title: '已删除',
-                icon: 'success',
-                duration: 2000
-            });
-            console.log('仅做展示，无操作');
         },
 
-        cancelThis() {
-            // console.log('函数是进的来的');
-            // Dialog.confirm({
-            //     title: '您确定取消？',
-            //     message: '取消后30分钟内不能再次执行',
-            //
-            // }).then(() => {
-            //     // on confirm
-            // }).catch(() => {
-            //     // on cancel
-            // });
+        deleteThis(e) {
+            let orderID = e.target.id;
+            fetchGraphql(updateorder,
+                {
+                    id: orderID,
+                    user_id: app.globalData.userID,
+                    orderStatus: 'deleted',
+                    updatedAt: Date.now()
+                },
+                null,
+                'updateorder',
+                null
+            )
+                .then(order => {
+                    wx.startPullDownRefresh();
+                });
+        },
 
+        cancelThis(e) {
+            let orderID = e.target.id;
+            let repertoryID = e.target.dataset.repertoryid;
+            let count = e.target.dataset.count;
             wx.showModal({
                 title: '确定取消？',
-                content: '取消后30分钟内不能再次预约',
+                content: '真的不考虑考虑吗?',
                 success(res) {
                     if (res.confirm) {
-                        console.log('仅做展示，无操作');
-                        wx.showToast({
-                            title: '已取消',
-                            icon: 'success',
-                            duration: 2000
-                        });
+                        fetchGraphql(updateorderAndupdaterepertory,
+                            {
+                                order_id: orderID,
+                                repertory_id: repertoryID,
+                                updatedAt: Date.now(),
+                                orderStatus: 'cancelled',
+                                count: count + 1
+                            }
+                        )
+                            .then(updateBothTwo => {
+                                wx.startPullDownRefresh();
+                            });
+
                     } else if (res.cancel) {
                         console.log('你取消了')
                     }

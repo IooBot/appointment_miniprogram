@@ -1,8 +1,11 @@
 {
+  "enablePullDownRefresh": true,
   "usingComponents": {
     "van-tab": "../../dist/tab/index",
     "van-tabs": "../../dist/tabs/index",
     "showMy": "./showMy/showMy",
     "contact": "./contact/contact"
-  }
+  },
+  "backgroundTextStyle": "dark",
+  "backgroundColor": "#ffffff"
 }

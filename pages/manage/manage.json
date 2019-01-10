@@ -8,5 +8,8 @@
     "van-tabs": "../../../dist/tabs/index",
     "AllOrders": "./allOrders/allOrders",
     "Release": "./release/release"
-  }
+  },
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark",
+  "backgroundColor": "#ffffff"
 }
