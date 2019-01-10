@@ -64,9 +64,14 @@ Component({
         },
 
         selectServer(e) {
-            this.setData({
-                serverID: e.target.id
-            });
+            if(e.target.id === this.data.serverID) {
+                wx.startPullDownRefresh();
+            } else {
+                this.setData({
+                    serverID: e.target.id
+                });
+            }
+
             wx.showLoading({
                 title: '获取服务中',
             })
